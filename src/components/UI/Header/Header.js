@@ -1,9 +1,11 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import CartContent from "../../Cart/CartContent";
 import { Card,Nav,Button,Navbar, Container } from "react-bootstrap";
+import CartContext from "../../../store/cart-context";
 
 const Header=()=>{
 
+    const ctx=useContext(CartContext);
     const [showCart,UpdateShowCart]=useState(false);
 const CartHandler=(event)=>{
     console.log("cart clicked")
@@ -25,7 +27,7 @@ return  <><Navbar style={{background:'black',border:'2px',borderColor:'white',di
 <Nav.Link href="#link"  style={{color:'white'}}>ABOUT</Nav.Link>
 
 </Nav>
-<Button variant="outline-info" onClick={CartHandler}>Cart</Button> 
+<Button variant="outline-info" onClick={CartHandler}>Cart {ctx.totalQuantity}</Button> 
 
 </Container>
 </Navbar>
