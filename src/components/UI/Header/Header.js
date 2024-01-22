@@ -1,7 +1,11 @@
 import React,{useState,useContext} from "react";
 import CartContent from "../../Cart/CartContent";
-import { Card,Nav,Button,Navbar, Container } from "react-bootstrap";
+import { Card,Nav,Button,Navbar, Container} from "react-bootstrap";
 import CartContext from "../../../store/cart-context";
+import { NavLink } from "react-router-dom";
+
+
+
 
 const Header=()=>{
 
@@ -18,19 +22,24 @@ const CartHandler=(event)=>{
 const hideCartHandler=()=>{
     UpdateShowCart(false);
 }
-return  <><Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
+return  <>
+ 
+<Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
     <Container>
-<Nav style={{background:'black',border:'2px',borderColor:'white' }} className="justify-content-center" activeKey="/home">
+    
+<Nav style={{background:'black',border:'2px',borderColor:'white' ,justifyContent:'center'}} className="justify-content-center" activeKey="/home">
 
-<Nav.Link  href="#link" style={{color:'white'}} >HOME</Nav.Link>
-<Nav.Link href="#link" style={{color:'white'}} >STORE</Nav.Link>
-<Nav.Link href="#link"  style={{color:'white'}}>ABOUT</Nav.Link>
+<NavLink  to="/" href="#home" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >HOME</NavLink>
+<NavLink to="/store" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >STORE</NavLink>
+<NavLink  to="/about" href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>ABOUT</NavLink>
 
 </Nav>
+
 <Button variant="outline-info" onClick={CartHandler}>Cart {ctx.totalQuantity}</Button> 
 
 </Container>
 </Navbar>
+
 <Card style={{ width: '98rem',textAlign:'center',height:'12rem', fontFamily:'fantasy', fontSize:'xx-large',color:'white',background:'grey' }}>
 <Card.Body>
 <Card.Title style={{fontSize:'7rem' ,fontFamily:'cursive'}}>THE GENERICS</Card.Title>

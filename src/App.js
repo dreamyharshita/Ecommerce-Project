@@ -1,9 +1,14 @@
 import React,{useState} from 'react';
+
 import Header from './components/UI/Header/Header';
 import AlbumCard from './components/Albums/AlbumCard';
 import CartContent from './components/Cart/CartContent';
 import './App.css';
 import CartProvider from './store/CartProvider';
+
+
+
+
 
 function App() {
 
@@ -23,6 +28,8 @@ function App() {
  
 
   return (
+    <>
+   
     <CartProvider>
       {cartState && <CartContent closeCart={cartFalse}/>}
     <Header cartTrue={cartTrue}></Header>
@@ -36,6 +43,9 @@ function App() {
     </div>
           
     </CartProvider>
+    
+    </>
+    
   );
 }
 
