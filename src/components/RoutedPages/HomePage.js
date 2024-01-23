@@ -1,7 +1,17 @@
-import React from "react";
+import React,{useState} from "react";
 import { Nav,Card,Container,Navbar,Button,Image} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 const HomePage=()=>{
+ 
+  const [data,updatedata]=useState([]);
+  async function getData(){
+    const response=  await fetch('https://swapi.dev/api/films/');
+    
+   const response2= await response.json();
+updatedata(response2.results);
+   console.log("in await");
+ 
+     }
 return  (
     <div>
         <Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
@@ -30,20 +40,16 @@ fontSize:'xx-large',color:'white',background:'grey' }}>
 </Card.Body>
 
 </Card>
-<h1 style={{textAlign:'center'}}>TOURS</h1>
+<h1 style={{textAlign:'center'}} onLoad={getData()}>TOURS</h1>
 <br/>
       <div style={{display:'flex', flexWrap:'wrap',justifyContent:'center'}}>
         <ul>
-    {[{date:"Jul 16", city:"toronto", description:"hello toronto"},
-    {date:"Jul 16", city:"NewYork", description:"hello newyork"}, 
-    {date:"Jul 16", city:"NewYork", description:"hello newyork"}, 
-    {date:"Jul 16", city:"NewYork", description:"hello newyork"}, 
-    {date:"Jul 16", city:"NewYork", description:"hello newyork"}].map((item)=>{
-     return  <><li >{item.date} {item.city} {item.description}  
-      <Button variant="primary" size="sm">Buy Ticket</Button></li><hr/></>
-     
-    })
-    }</ul>
+{ data.map((item)=>{
+    return <> <li >{item.title}  
+       <Button variant="primary" size="sm">Buy Ticket</Button></li><hr/></>
+      
+     })
+}</ul>
       </div>
       <Card style={{ width: '98rem',textAlign:'left',height:'8rem', fontFamily:'fantasy',
        fontSize:'xx-large',color:'white',background:'blue' }}>
