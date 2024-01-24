@@ -5,14 +5,24 @@ const HomePage=()=>{
  
   const [data,updatedata]=useState([]);
   const [loading,setLoading]=useState(false);
+  const [err,setError]=useState(null);
   async function getData(){
+    setError(null);
     setLoading(true);
-    const response=  await fetch('https://swapi.dev/api/films/');
-    
-   const response2= await response.json();
-updatedata(response2.results);
-   console.log("in await");
-  setLoading(false);
+    try{
+      const response=  await fetch('https://swapi.dev/api/fil/');
+      if(!response.ok){
+   throw new Error('Something went wrong..retrying');
+      }
+     const response2= await response.json();
+  updatedata(response2.results);
+     console.log("in await");
+    setLoading(false);
+    }catch(error){
+ setError(error.message);
+ setLoading(false);
+    }
+  
      }
 return  (
     <div>
@@ -53,7 +63,13 @@ fontSize:'xx-large',color:'white',background:'grey' }}>
       
      })
 }
-{loading && <p style={{fontSize:'25px',fontWeight:'bold'}}>Loading...</p>}</ul>
+{loading && <p style={{fontSize:'25px',fontWeight:'bold'}}>Loading...</p>}
+{!loading && err && <p>{err}...<button onClick={()=>{
+  setError(null);
+  setLoading(false);
+  
+}}>cancel retrying</button></p>} 
+{!err && !loading &&  <p>stopped retrying</p> }</ul>
  
 
       </div>
