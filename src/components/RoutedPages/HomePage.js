@@ -4,13 +4,15 @@ import { NavLink } from "react-router-dom";
 const HomePage=()=>{
  
   const [data,updatedata]=useState([]);
+  const [loading,setLoading]=useState(false);
   async function getData(){
+    setLoading(true);
     const response=  await fetch('https://swapi.dev/api/films/');
     
    const response2= await response.json();
 updatedata(response2.results);
    console.log("in await");
- 
+  setLoading(false);
      }
 return  (
     <div>
@@ -35,21 +37,25 @@ fontSize:'xx-large',color:'white',background:'grey' }}>
 <Card.Body style={{marginright:'5rem'}}>
 <Card.Title style={{fontSize:'7rem' ,fontFamily:'cursive'}}>THE GENERICS</Card.Title>
 <Button variant="outline-info" style={{fontSize:'20px'}}>Get Our Latest Album</Button><br/>
-<Image style={{width:'3rem',height:'3rem'}}
+<Image style={{width:'3rem',height:'3rem'}}  onLoad={()=>{getData()}}
  src='https://media.istockphoto.com/id/1705965906/photo/blue-play-button-on-black-background-start-button-neon-glowing-play-button-neon-glowing-play.jpg?s=1024x1024&w=is&k=20&c=lGiydzDuR6HRCUuhL5lBlTGEyzr3MbITOrbf10GPPhg='></Image>
 </Card.Body>
 
 </Card>
-<h1 style={{textAlign:'center'}} onLoad={getData()}>TOURS</h1>
+<h1 style={{textAlign:'center'}}  >TOURS</h1>
 <br/>
       <div style={{display:'flex', flexWrap:'wrap',justifyContent:'center'}}>
-        <ul>
-{ data.map((item)=>{
+       
+    <ul>
+{ !loading && data.map((item)=>{
     return <> <li >{item.title}  
        <Button variant="primary" size="sm">Buy Ticket</Button></li><hr/></>
       
      })
-}</ul>
+}
+{loading && <p style={{fontSize:'25px',fontWeight:'bold'}}>Loading...</p>}</ul>
+ 
+
       </div>
       <Card style={{ width: '98rem',textAlign:'left',height:'8rem', fontFamily:'fantasy',
        fontSize:'xx-large',color:'white',background:'blue' }}>
