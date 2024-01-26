@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect, useCallback} from "react";
 import { Nav,Card,Container,Navbar,Button,Image} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 const HomePage=()=>{
@@ -6,11 +6,11 @@ const HomePage=()=>{
   const [data,updatedata]=useState([]);
   const [loading,setLoading]=useState(false);
   const [err,setError]=useState(null);
-  async function getData(){
+ const getData=useCallback(async ()=>{
     setError(null);
     setLoading(true);
     try{
-      const response=  await fetch('https://swapi.dev/api/fil/');
+      const response=  await fetch('https://swapi.dev/api/films/');
       if(!response.ok){
    throw new Error('Something went wrong..retrying');
       }
@@ -23,7 +23,12 @@ const HomePage=()=>{
  setLoading(false);
     }
   
-     }
+     },[]);
+
+     useEffect(() => {
+      getData();
+    }, [getData]);
+  
 return  (
     <div>
         <Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
