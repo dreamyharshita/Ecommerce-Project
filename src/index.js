@@ -4,6 +4,7 @@ import {createBrowserRouter,RouterProvider} from 'react-router-dom';
 
 import AboutPage from './components/RoutedPages/AboutPage';
 import HomePage from './components/RoutedPages/HomePage';
+import ContactPage from './components/RoutedPages/ContactPage';
 import './index.css';
 import App from './App';
 
@@ -18,7 +19,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 const router= createBrowserRouter([
    {path:'/',element:<App/>},
    {path:'/about',element:<AboutPage></AboutPage>},
-   {path:'/home',element:<HomePage></HomePage>}
+   {path:'/home',element:<HomePage></HomePage>},
+   {path:'/contact',element:<ContactPage></ContactPage>}
    
   
     ]);
