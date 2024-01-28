@@ -6,6 +6,7 @@ import AboutPage from './components/RoutedPages/AboutPage';
 import HomePage from './components/RoutedPages/HomePage';
 import ContactPage from './components/RoutedPages/ContactPage';
 import './index.css';
+import Album from './components/RoutedPages/Album';
 import App from './App';
 
 /*
@@ -20,12 +21,8 @@ const router= createBrowserRouter([
    {path:'/',element:<App/>},
    {path:'/about',element:<AboutPage></AboutPage>},
    {path:'/home',element:<HomePage></HomePage>},
-   {path:'/contact',element:<ContactPage></ContactPage>}
-   
-  
-    ]);
-  
-
+   {path:'/contact',element:<ContactPage></ContactPage>},
+   {path:'product-details/:pid',element:<Album/>}])
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

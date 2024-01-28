@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Card,Button } from "react-bootstrap";
 import CartContext from "./../../store/cart-context";
+import { NavLink } from "react-router-dom";
+
 
 const AlbumCard=(props)=>{
  
@@ -55,7 +57,8 @@ const AlbumCard=(props)=>{
            return <Card key={index} style={{ width: '18rem' ,margin:'10rem'}}>
       <Card.Img variant="top" src={item.imageUrl} />
       <Card.Body>
-        <Card.Title>{item.title}</Card.Title>
+        <Card.Title>
+            <NavLink to={"/product-details/"+ item.id}>{item.title}</NavLink></Card.Title>
 
         <Button variant="primary" id={'bt_'+index} value="0" onClick={()=>{
             let quantity=parseInt(document.getElementById('bt_'+index).value);
