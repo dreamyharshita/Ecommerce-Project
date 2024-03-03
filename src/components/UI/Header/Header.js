@@ -30,9 +30,10 @@ return  <>
 <Nav style={{background:'black',border:'2px',borderColor:'white' ,justifyContent:'center'}} className="justify-content-center" activeKey="/home">
 
 <NavLink  to="/home" href="#home" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >HOME</NavLink>
-<NavLink to="/" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >STORE</NavLink>
+<NavLink to={"/login/" + ctx.token} style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >STORE</NavLink>
 <NavLink  to="/about" href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>ABOUT</NavLink>
 <NavLink  to="/contact" href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>CONTACT US</NavLink>
+<NavLink  to={"/login/" + ctx.token} href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>LOGIN</NavLink>
 </Nav>
 
 <Button variant="outline-info" onClick={CartHandler}>Cart {ctx.totalQuantity}</Button> 

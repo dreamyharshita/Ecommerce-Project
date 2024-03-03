@@ -1,17 +1,22 @@
-import React,{useRef,useState} from "react";
+import React,{useRef} from "react";
 import Header from './../UI/Header/Header.js'
-
+import CartContext from "../../store/cart-context.js";
 
 
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+
 
 
 const LoginPage=()=>{
+ 
+const ctx=useContext(CartContext);
+
  const emailRef=useRef();
  const passwordRef=useRef();
 const navigate=useNavigate();
- const [login,setLogin]=useState(false);
 
+ 
  const LoginHandler=async (e)=>{
   
   e.preventDefault();
@@ -30,15 +35,28 @@ const navigate=useNavigate();
    
    if(res.ok){
     alert("logged in");
-    setLogin(true);
     passwordRef.current.value="";
    emailRef.current.value="";
+   const data= await res.json();
+   const id=data.idToken;
+  ctx.login(id);
+ 
    }
    else{
     alert("Authentication failed..");
    }
  
    
+ }
+ const NavigateFun=()=>{
+  if(ctx.token!==null){
+    
+    navigate('/login/'+ ctx.token);
+    console.log("isLogin",ctx.isLogin);
+  console.log("Id",ctx.token);
+  }
+ 
+  
  }
 return <>
 <Header/>
@@ -63,7 +81,8 @@ return <>
   </div>
   
 </form>
-{login && navigate('/') }
+{ctx.isLogin &&  NavigateFun()}
+
 </>
 
 

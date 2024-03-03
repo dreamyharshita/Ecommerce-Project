@@ -62,23 +62,15 @@ const AlbumCard=(props)=>{
 
         <Button variant="primary" id={'bt_'+index} value="0" onClick={()=>{
             let quantity=parseInt(document.getElementById('bt_'+index).value);
-            console.log("got cuurent quantity of the item",quantity);
-            if(quantity>0){
+            console.log("got current quantity of the item",quantity);
+            
                 quantity+=1;
                 item.quantity=quantity;
                 console.log("item ki quantity",item.quantity);
                 document.getElementById('bt_'+ index).value=quantity;
                 CartCTX.addItem({...item,"quantity":quantity});
                 console.log("quantity",quantity);
-            }
-            else{
-                quantity+=1;
-                console.log("sabse pheli quantity");
-                document.getElementById('bt_'+ index).value=quantity;
-                CartCTX.addItem({...item,"quantity":quantity});
-
-
-            }
+            
            
            
            
