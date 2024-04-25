@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Card,Button } from "react-bootstrap";
 import CartContext from "./../../store/cart-context";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 
 const AlbumCard=(props)=>{
@@ -51,6 +52,8 @@ const AlbumCard=(props)=>{
         
         ];
     
+        let email=localStorage.getItem("email").toString().split('@').join('').split('.').join('');
+        let crud_id="";
         
     return(<> {
         Products.map((item,index)=>{
@@ -69,14 +72,21 @@ const AlbumCard=(props)=>{
                 console.log("item ki quantity",item.quantity);
                 document.getElementById('bt_'+ index).value=quantity;
                 CartCTX.addItem({...item,"quantity":quantity});
-                console.log("quantity",quantity);
-            
-           
-           
-           
-         
- 
-CartCTX.addItem({...item,"quantity":quantity});
+                console.log("id before deletion",crud_id);
+                if(localStorage.getItem("id")!=="")
+                {
+                    crud_id=localStorage.getItem("id");
+                    axios.delete(`https://crudcrud.com/api/d83d103a67a34f8d98f1ef5f32d02f07/${email}/${crud_id}`).then(()=>{
+                        console.log("deleted");
+                    })
+                }
+                axios.post(`https://crudcrud.com/api/d83d103a67a34f8d98f1ef5f32d02f07/${email}`,{
+      "items": CartCTX.items
+    }).then((res)=>{
+    crud_id=res.data._id;
+    localStorage.setItem("id",crud_id);
+    console.log(crud_id);}
+    )
 
         }}>Add to Cart</Button>
       </Card.Body>

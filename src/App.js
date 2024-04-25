@@ -15,12 +15,14 @@ import { useContext } from 'react';
 function App() {
 
   const ctx=useContext(CartContext);
+  
+
   const [cartState, setCartState] = useState(false);
   const navigate=useNavigate();
   function cartTrue()
   {
     setCartState(true)
-    console.log("object")
+    
   }
 
   function cartFalse()
@@ -33,7 +35,8 @@ const logoutHandler=(e)=>{
   e.preventDefault();
   ctx.login(null);
   navigate("/login/null");
-  console.log("logout clicked")
+ localStorage.clear();
+ localStorage.setItem("email",null);
 }
   return (
     <>
@@ -43,9 +46,10 @@ const logoutHandler=(e)=>{
     <Header cartTrue={cartTrue}></Header>
     
     <div>
-
+<div style={{justifyContent:"center",alignItems:"center", display:"flex", flexDirection:"column"}}>
       <h1 style={{textAlign:'center'}}>MUSIC </h1>
-      <button onClick={logoutHandler}>Logout</button>
+      <button onClick={logoutHandler} >Logout</button>
+      </div>
       <div style={{display:'flex', flexWrap:'wrap'}}>
     <AlbumCard></AlbumCard>
       </div>

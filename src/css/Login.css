@@ -1,0 +1,14 @@
+.login_page{
+    display: flex;
+    align-items: center;
+   
+    flex-direction: column;
+    background:cornflowerBlue;
+    width:100%;
+    height:100vh ;
+     
+}
+.btn{
+   
+    width: 7rem;
+}

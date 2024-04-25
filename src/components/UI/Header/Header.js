@@ -1,10 +1,9 @@
 import React,{useState,useContext} from "react";
 import CartContent from "../../Cart/CartContent";
-import { Card,Nav,Button,Navbar, Container} from "react-bootstrap";
+import { Card,Nav,Button,Navbar} from "react-bootstrap";
 import CartContext from "../../../store/cart-context";
 import { NavLink } from "react-router-dom";
-
-
+import './../../../css/Header.css';
 
 
 const Header=()=>{
@@ -22,12 +21,12 @@ const CartHandler=(event)=>{
 const hideCartHandler=()=>{
     UpdateShowCart(false);
 }
-return  <>
+return  <div className="header">
  
-<Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
-    <Container>
-    
-<Nav style={{background:'black',border:'2px',borderColor:'white' ,justifyContent:'center'}} className="justify-content-center" activeKey="/home">
+<Navbar className="NavBar" >
+    <div className="NavBar_in">
+        <div>
+<Nav className="nav"   activeKey="/home">
 
 <NavLink  to="/home" href="#home" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >HOME</NavLink>
 <NavLink to={"/login/" + ctx.token} style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >STORE</NavLink>
@@ -35,19 +34,26 @@ return  <>
 <NavLink  to="/contact" href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>CONTACT US</NavLink>
 <NavLink  to={"/login/" + ctx.token} href="#about" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}}>LOGIN</NavLink>
 </Nav>
+</div>
+<div>
+<Button className="btn_cart" variant="outline-info" onClick={CartHandler}>Cart {ctx.totalQuantity}</Button> 
+</div>
+</div>
 
-<Button variant="outline-info" onClick={CartHandler}>Cart {ctx.totalQuantity}</Button> 
-
-</Container>
 </Navbar>
 
-<Card style={{ width: '98rem',textAlign:'center',height:'12rem', fontFamily:'fantasy', fontSize:'xx-large',color:'white',background:'grey' }}>
-<Card.Body>
+
+
+<Card className="card_header">
+<Card.Body >
 <Card.Title style={{fontSize:'7rem' ,fontFamily:'cursive'}}>THE GENERICS</Card.Title>
 </Card.Body>
+
 </Card>
+
 {showCart && <CartContent onClose={hideCartHandler}></CartContent>}
-</> 
+
+</div> 
 }
 
 export default Header;

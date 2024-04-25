@@ -24,7 +24,7 @@ const AboutPage=()=>{
                 
                 
                 </div>
-                <Card style={{ width: '98rem',textAlign:'left',height:'8rem', fontFamily:'fantasy', fontSize:'xx-large',color:'white',background:'blue' }}>
+                <Card style={{ width: '98rem',textAlign:'left',height:'8rem', fontFamily:'fantasy', fontSize:'xx-large',color:'white',background:'cornflowerblue' }}>
 <Card.Body>
 <Card.Title style={{fontSize:'5rem' ,fontFamily:'cursive'}}>The Generics</Card.Title>
 </Card.Body>

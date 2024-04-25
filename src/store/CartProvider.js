@@ -7,6 +7,7 @@ const [items,updateItems]=useState([]);
 
 const [token,setToken]=useState(null);
 const[userIsLoggedIn,setLoggedIn]=useState(false);
+
     const[amount,updateAmount]=useState(0);
 
     const addItemHandler=(item)=>{
@@ -60,10 +61,14 @@ updateAmount(parseInt(amount)-1);
  
 
  const loginHandler=(token)=>{
- 
+
   setToken(token);
+  console.log(!!token);
   setLoggedIn(!!token);
+  
  }
+
+
 
   return (
     <CartContext.Provider value={{items:items,
@@ -72,7 +77,9 @@ updateAmount(parseInt(amount)-1);
     removeItem:removeItemFromCartHandler,
     isLogin:userIsLoggedIn,
     login:loginHandler,
-    token:token}}>
+   
+    token:token,
+    }}>
       {props.children }
      
     </CartContext.Provider>

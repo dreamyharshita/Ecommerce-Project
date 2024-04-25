@@ -6,6 +6,15 @@ import CartContext from "../../store/cart-context";
 const CartContent=(props)=>{
     const cartCtx = useContext(CartContext)
 
+    
+    
+  
+  
+
+      
+   
+  
+
     const AddingQuantity=(e)=>{
   e.preventDefault();
   let event_id=e.target.value;
@@ -49,7 +58,7 @@ const CartContent=(props)=>{
 
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onClose}>Close</Button>
-          <Button variant="primary">Save changes</Button>
+          <Button variant="primary">Order</Button>
         </Modal.Footer>
       
       </Modal>

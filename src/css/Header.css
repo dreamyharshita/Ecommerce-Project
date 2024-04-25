@@ -1,0 +1,53 @@
+.header{
+   display: flex;
+   flex: 100%;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+  
+   
+}
+.NavBar{
+    display: grid;
+    grid-template-columns: 2.5rem auto 2rem;
+    height: 5rem;
+    align-items: center;
+    width: 100%;
+    border-bottom: 0.1rem solid whitesmoke;
+    padding: 1rem;
+    background-color: rgb(3, 3, 122);
+}
+.NavBar_in{
+    display: flex;
+    flex:0.9;
+   align-items: center;
+    justify-content:space-between;
+   
+}
+.nav{
+    display: flex;
+    
+    background:'darkblue';
+    border:0.2rem;
+    border-color:'white';
+   align-items: center;
+   justify-content: space-between;
+   
+}
+.btn_cart{
+    display: flex;
+    
+    align-items: center;
+    justify-content: space-between;
+}
+.card_header{
+    width:100%;
+    align-items: center;
+   
+    height:'12rem';
+    font-family:'fantasy';
+    font-size:'xx-large';
+   
+   
+}
+

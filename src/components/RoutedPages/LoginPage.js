@@ -1,16 +1,18 @@
 import React,{useRef} from "react";
 import Header from './../UI/Header/Header.js'
 import CartContext from "../../store/cart-context.js";
-
-
+import { Button,Container,Row,Col } from "react-bootstrap";
+import './../../css/Login.css';
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 
 
-
 const LoginPage=()=>{
  
-const ctx=useContext(CartContext);
+  const ctx=useContext(CartContext);
+  
+  
+
 
  const emailRef=useRef();
  const passwordRef=useRef();
@@ -34,12 +36,14 @@ const navigate=useNavigate();
     })
    
    if(res.ok){
-    alert("logged in");
-    passwordRef.current.value="";
-   emailRef.current.value="";
+  
+   
    const data= await res.json();
    const id=data.idToken;
+   const em=emailRef.current.value;
+   console.log("email",em);
   ctx.login(id);
+  alert("logged in");
  
    }
    else{
@@ -52,15 +56,18 @@ const navigate=useNavigate();
   if(ctx.token!==null){
     
     navigate('/login/'+ ctx.token);
-    console.log("isLogin",ctx.isLogin);
-  console.log("Id",ctx.token);
+    localStorage.clear();
+    localStorage.setItem("email",emailRef.current.value);
   }
  
   
  }
-return <>
+return <Container fluid>
+  <Row>
+    <Col>
 <Header/>
-<form style={{marginLeft:"25rem",marginRight:"25rem",justifyContent:"center",display:"flex",flexWrap:"wrap",borderStyle:"dashed",borderColor:"black"}} >
+<div className="login_page">
+<form style={{marginLeft:"25rem",marginRight:"25rem",marginBottom:"20px" ,padding:"15px",background:"white", justifyContent:"center",display:"flex",flexWrap:"wrap",borderStyle:"dashed",borderColor:"black"}} >
   <div >
     <label htmlFor='email'>Your Email</label>
     <input ref={emailRef} type='email' id='email' required />
@@ -82,8 +89,15 @@ return <>
   
 </form>
 {ctx.isLogin &&  NavigateFun()}
+<Button variant="outline-dark" onClick={(e)=>{
+  e.preventDefault();
+navigate("/signup");
+}}>SignUp</Button>
+</div>
+</Col>
+</Row>
+</Container>
 
-</>
 
 
 }

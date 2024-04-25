@@ -17,6 +17,7 @@ import '../node_modules/react-bootstrap/dist/react-bootstrap.min.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import LoginPage from './components/RoutedPages/LoginPage';
 import CartProvider from './store/CartProvider';
+import SignUp from './components/RoutedPages/SignUp';
 
 
 const router= createBrowserRouter([
@@ -26,6 +27,7 @@ const router= createBrowserRouter([
    {path:'/home',element:<HomePage></HomePage>},
    {path:'/contact',element:<ContactPage></ContactPage>},
    {path:'product-details/:pid',element:<Album/>},
+   {path:'/signup',element:<SignUp/>},
 {path:'/login/:pid',element:<App/>}])
 
 

@@ -1,11 +1,19 @@
 import React,{useState,useEffect, useCallback} from "react";
 import { Nav,Card,Container,Navbar,Button,Image} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import TicketModal from "../UI/TicketModal";
+import th from "./../../assests/th.png";
 const HomePage=()=>{
  
   const [data,updatedata]=useState([]);
   const [loading,setLoading]=useState(false);
   const [err,setError]=useState(null);
+  const[cancel,setCancel]=useState(false);
+  const[showmodal,setShowmodal]=useState(false);
+  const[ticket,setdata]=useState('');
+  
+ 
+  
  const getData=useCallback(async ()=>{
     setError(null);
     setLoading(true);
@@ -31,10 +39,10 @@ const HomePage=()=>{
   
 return  (
     <div>
-        <Navbar style={{background:'black',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
+        <Navbar style={{background:'darkblue',border:'2px',borderColor:'white',display:'flex', flexWrap:'wrap',justifyContent:'space-between'}}>
     <Container>
     
-<Nav style={{background:'black',border:'2px',borderColor:'white' ,justifyContent:'center'}} className="justify-content-center" activeKey="/home">
+<Nav style={{background:'darkblue',border:'2px',borderColor:'white' ,justifyContent:'center'}} className="justify-content-center" activeKey="/home">
 
 <NavLink  to="/home" href="#home" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >HOME</NavLink>
 <NavLink to="/" style={{margin:'4px',color:'white',border:'2px' ,borderColor:'white'}} >STORE</NavLink>
@@ -48,12 +56,12 @@ return  (
 </Navbar>
 
 <Card style={{ width: '98rem',textAlign:'center',height:'20rem', fontFamily:'fantasy', 
-fontSize:'xx-large',color:'white',background:'grey' }}>
+fontSize:'xx-large',color:'white',background:'blue' }}>
 <Card.Body style={{marginright:'5rem'}}>
 <Card.Title style={{fontSize:'7rem' ,fontFamily:'cursive'}}>THE GENERICS</Card.Title>
-<Button variant="outline-info" style={{fontSize:'20px'}}>Get Our Latest Album</Button><br/>
-<Image style={{width:'3rem',height:'3rem'}}  onLoad={()=>{getData()}}
- src='https://media.istockphoto.com/id/1705965906/photo/blue-play-button-on-black-background-start-button-neon-glowing-play-button-neon-glowing-play.jpg?s=1024x1024&w=is&k=20&c=lGiydzDuR6HRCUuhL5lBlTGEyzr3MbITOrbf10GPPhg='></Image>
+<Button variant="outline-info" style={{fontSize:'20px'}}  onLoad={()=>{getData()} }>Get Our Latest Album</Button><br/>
+
+<Image style={{width:'3rem',height:'3rem',marginTop:'1rem'}}src={th}></Image>
 </Card.Body>
 
 </Card>
@@ -64,22 +72,32 @@ fontSize:'xx-large',color:'white',background:'grey' }}>
     <ul>
 { !loading && data.map((item)=>{
     return <> <li >{item.title}  
-       <Button variant="primary" size="sm">Buy Ticket</Button></li><hr/></>
+       <Button variant="primary" size="sm" onClick={(e)=>{
+        e.preventDefault();
+console.log("buttonclicked")
+       setShowmodal(!showmodal);
+       const title=item.title;
+       setdata(title);
+       }}>Buy Ticket</Button></li><hr/></>
       
      })
+     
 }
+{showmodal && <TicketModal show="true" heading={ticket}></TicketModal>}
+
 {loading && <p style={{fontSize:'25px',fontWeight:'bold'}}>Loading...</p>}
 {!loading && err && <p>{err}...<button onClick={()=>{
   setError(null);
   setLoading(false);
-  
+  setCancel(!cancel);
+
 }}>cancel retrying</button></p>} 
-{!err && !loading &&  <p>stopped retrying</p> }</ul>
+{!err && !loading && cancel && <div>{alert("stopped retrying")}</div> }</ul>
  
 
       </div>
       <Card style={{ width: '98rem',textAlign:'left',height:'8rem', fontFamily:'fantasy',
-       fontSize:'xx-large',color:'white',background:'blue' }}>
+       fontSize:'xx-large',color:'white',background:'cornflowerblue' }}>
 <Card.Body>
 <Card.Title style={{fontSize:'5rem' ,fontFamily:'cursive'}}>The Generics</Card.Title>
 </Card.Body>
